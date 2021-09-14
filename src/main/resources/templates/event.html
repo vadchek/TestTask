@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p th:text="${message}" />
+
+<form th:action="@{/event}" method="post">
+    <p th:text="'Enter start time of event:'" />
+    <input type="datetime-local" name=sFrom />
+
+    <p th:text="'Enter end time of event:'" />
+    <input type="datetime-local" name=sTo />
+
+    <p th:text="'Enter description:'" />
+    <input type="text" name=description placeholder="Description:"/>
+
+    <div><input type="submit" value="Book"/></div>
+</form>
+
+
+<a href="/events">See calendar</a>
+
+</body>
+</html>

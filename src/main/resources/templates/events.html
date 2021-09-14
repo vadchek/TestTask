@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor=Moccasin>
+<p th:text="'Calendar:'" />
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<a href="/event">Book MeetRoom</a>
+
+<form th:action="@{/events}" method="get">
+    <input type="hidden" name=n value="1" />
+    <input type="submit" value=">"/>
+</form>
+
+<form th:action="@{/events}" method="get">
+    <input type="hidden" name=n value="-1" />
+    <input type="submit" value="<"/>
+</form>
+
+<div style="overflow: hidden;">
+    <div style="width: 100%;">
+        <div style="float: left; width: 9%; height: 750px; background-color:Moccasin">
+            <div style="height: 30px"></div>
+            <div style="height: 30px;">00:00</div>
+            <div style="height: 30px">01:00</div>
+            <div style="height: 30px">02:00</div>
+            <div style="height: 30px">03:00</div>
+            <div style="height: 30px">04:00</div>
+            <div style="height: 30px">05:00</div>
+            <div style="height: 30px">06:00</div>
+            <div style="height: 30px">07:00</div>
+            <div style="height: 30px">08:00</div>
+            <div style="height: 30px">09:00</div>
+            <div style="height: 30px">10:00</div>
+            <div style="height: 30px">11:00</div>
+            <div style="height: 30px">12:00</div>
+            <div style="height: 30px">13:00</div>
+            <div style="height: 30px">14:00</div>
+            <div style="height: 30px">15:00</div>
+            <div style="height: 30px">16:00</div>
+            <div style="height: 30px">17:00</div>
+            <div style="height: 30px">18:00</div>
+            <div style="height: 30px">19:00</div>
+            <div style="height: 30px">20:00</div>
+            <div style="height: 30px">21:00</div>
+            <div style="height: 30px">22:00</div>
+            <div style="height: 30px">23:00</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:khaki">
+            <div style="height: 30px"> Monday</div>
+
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
+            <div style="height: 30px"> Tuesday</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:khaki">
+            <div style="height: 30px"> Wednesday</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
+            <div style="height: 30px"> Thursday</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:khaki">
+            <div style="height: 30px"> Friday</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
+            <div style="height: 30px"> Saturday</div>
+        </div>
+        <div style="float: left; width: 13%; height: 750px; background-color:khaki">
+            <div style="height: 30px"> Sunday</div>
+        </div>
+    </div>
+</div>
+
+<div th:each="rect : ${rectangles}">
+    <p th:utext = "${rect}"> </p>
+</div>
+<svg width="1200" height="800">
+    <rect th:utext = "${rect}"> </rect>
+</svg>
+
+</body>
+</html>
