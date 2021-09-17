@@ -3,6 +3,11 @@ package com.vadim.calendar;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * This class describes the events that the user creates
+ * Objects of this class are fields of the event table
+ */
+
 @Entity
 @Table(name = "event")
 public class Event {
@@ -16,6 +21,26 @@ public class Event {
     private LocalDateTime to;
     @Column(name = "details")
     private String description;
+    @Column(name = "creator")
+    private String creator;
+    @Column(name = "title")
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
 
     public Long getId() {
         return id;
@@ -47,5 +72,13 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDetails(){
+        return "Title: " + title
+                + "\n Description: " + description
+                + "\n Start time: " + from
+                + "\n End time: " + to
+                + "\n Creator: " + creator;
     }
 }

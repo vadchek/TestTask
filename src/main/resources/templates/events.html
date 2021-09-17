@@ -2,28 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body bgcolor=Moccasin>
-<p th:text="'Calendar:'" />
 
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<div style="width:100%;height:20%;position:absolute;top:0%;left:0;">
+    <p th:text="'Calendar:'"/>
 
-<a href="/event">Book MeetRoom</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 
-<form th:action="@{/events}" method="get">
-    <input type="hidden" name=n value="1" />
-    <input type="submit" value=">"/>
-</form>
+    <a href="/event">Book MeetRoom</a>
+    <div style="float: left; width: 100%">
 
-<form th:action="@{/events}" method="get">
-    <input type="hidden" name=n value="-1" />
-    <input type="submit" value="<"/>
-</form>
+        <div style="float: left; width: 5%">
+            <form th:action="@{/events}" method="get">
+                <input type="hidden" name=counter value="-1"/>
+                <input type="submit" value="<"/>
+            </form>
+        </div>
+        <div style="float: left; width: 5%">
+            <form th:action="@{/events}" method="get">
+                <input type="hidden" name=counter value="1"/>
+                <input type="submit" value=">"/>
+            </form>
+        </div>
+    </div>
+</div>
 
-<div style="overflow: hidden;">
+<div style="overflow:hidden;width:100%;height:100%;position:absolute;top:20%;left:0;">
     <div style="width: 100%;">
         <div style="float: left; width: 9%; height: 750px; background-color:Moccasin">
             <div style="height: 30px"></div>
@@ -53,36 +61,39 @@
             <div style="height: 30px">23:00</div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:khaki">
-            <div style="height: 30px"> Monday</div>
-
+            <div style="height: 30px" th:text="'Monday ' + ${monday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
-            <div style="height: 30px"> Tuesday</div>
+            <div style="height: 30px" th:text="'Tuesday ' + ${tuesday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:khaki">
-            <div style="height: 30px"> Wednesday</div>
+            <div style="height: 30px" th:text="'Wednesday ' + ${wednesday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
-            <div style="height: 30px"> Thursday</div>
+            <div style="height: 30px" th:text="'Thursday ' + ${thursday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:khaki">
-            <div style="height: 30px"> Friday</div>
+            <div style="height: 30px" th:text="'Friday ' + ${friday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:Moccasin">
-            <div style="height: 30px"> Saturday</div>
+            <div style="height: 30px" th:text="'Saturday ' + ${saturday}"></div>
         </div>
         <div style="float: left; width: 13%; height: 750px; background-color:khaki">
-            <div style="height: 30px"> Sunday</div>
+            <div style="height: 30px" th:text="'Sunday ' + ${sunday}"></div>
         </div>
     </div>
 </div>
-
-<div th:each="rect : ${rectangles}">
-    <p th:utext = "${rect}"> </p>
-</div>
-<svg width="1200" height="800">
-    <rect th:utext = "${rect}"> </rect>
+<svg style="width:100%;height:100%;position:absolute;top:20%;left:0;">
+    <rect th:each="rect : ${rectangles}"
+          th:attr="x=${9 + ((rect.weekDay - 1) * 13) + '%'}, y=${30 + (rect.start.hour * 30) + (rect.start.minute / 2)}, height=${rect.duration.toMinutes()/2}, onclick=${'alert(`' + rect.description + '`)'}"
+          style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" width="13%">
+    </rect>
+    <text th:each="rect : ${rectangles}"
+          th:attr="x=${9 + ((rect.weekDay - 1) * 13) + '%'}, y=${45 + (rect.start.hour * 30) + (rect.start.minute / 2)}"
+          fill="black" th:text="${rect.title}">
+    </text>
 </svg>
 
 </body>
 </html>
+

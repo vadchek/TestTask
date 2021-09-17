@@ -7,6 +7,11 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * This class describes the events that the user creates
+ * Objects of this class are fields of the users table
+ */
+
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {

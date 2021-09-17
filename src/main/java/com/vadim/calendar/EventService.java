@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -13,11 +14,21 @@ import java.util.List;
 @Service
 public class EventService {
 
-    private Integer numberOfWeek = 0;
+    private Integer numberOfWeek = 0;/*the difference in weeks between the displayed week and the current week */
+    private LocalDate startOfWeek; /*start date of the displayed week */
+
     @Autowired
     private EventRepository repository;
 
-    public void save(LocalDateTime from, LocalDateTime to, String description) {
+    /**
+     * This method validates data entered by user
+     * If data is correct and there is no time overlap with other events, a new event is created
+     */
+    public void save(LocalDateTime from, LocalDateTime to, String description, String creator, String title) {
+
+        if (to.isBefore(from)) {
+            throw new IllegalArgumentException("From " + from + "can't be before to " + to);
+        }
 
         if (Duration.between(from,to).toMinutes() < 30 || Duration.between(from,to).toHours() > 24){
             throw new IllegalArgumentException("Time range should be more than 30 minutes and less than 24 hour");
@@ -40,14 +51,25 @@ public class EventService {
         event.setFrom(from);
         event.setTo(to);
         event.setDescription(description);
+        event.setCreator(creator);
+        event.setTitle(title);
         repository.save(event);
     }
 
-    public List<Event> getWeek(Integer n) {
-        numberOfWeek += n;
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime to = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).plusWeeks(numberOfWeek);
+    /**
+     * This method returns list of events of one week
+     */
+    public List<Event> getWeek(Integer counter) {
+        numberOfWeek += counter;
+        LocalDate now = LocalDate.now();
+        LocalDateTime to = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atStartOfDay().plusWeeks(numberOfWeek);
         LocalDateTime from = to.minusWeeks(1);
+        startOfWeek = from.toLocalDate();
         return repository.findByFromBetweenOrToBetween(from,to,from,to);
     }
+
+    public LocalDate getStartOfWeek(){
+        return startOfWeek;
+    }
+
 }

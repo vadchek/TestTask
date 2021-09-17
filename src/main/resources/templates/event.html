@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body bgcolor=Moccasin>
 
 <p th:text="${message}" />
 
@@ -13,6 +13,9 @@
 
     <p th:text="'Enter end time of event:'" />
     <input type="datetime-local" name=sTo />
+
+    <p th:text="'Enter title:'" />
+    <input type="text" name=title placeholder="Title:"/>
 
     <p th:text="'Enter description:'" />
     <input type="text" name=description placeholder="Description:"/>

@@ -9,5 +9,10 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    List<Event> findByFromBetweenOrToBetween(LocalDateTime start, LocalDateTime finish, LocalDateTime start1, LocalDateTime finish1);
+    /**
+     * This method returns list of events overlapping in time with the range
+     * startFrom = startTo = start of range
+     * finishFrom = finishTo = end of range
+     */
+    List<Event> findByFromBetweenOrToBetween(LocalDateTime startFrom, LocalDateTime finishFrom, LocalDateTime startTo, LocalDateTime finishTo);
 }
