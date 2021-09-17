@@ -9,7 +9,6 @@
   <li>Meeting room booking function.</li>
   <li>Displaying event information on click.	</li>
 </ul>
----
 
 <br>Build and launch order
 
