@@ -13,11 +13,11 @@
 <br>Build and launch order
 
 <ul>
-  <li>1. Create a database named TestTaskBase in PostgreSQL.</li>
-  <li>2. Restore database using TestTaskBase.backup file.</li>
-  <li>3. In file application.properties enter your login and password.</li>
-  <li>4. подтянуть зависимости в gradle.</li>
-  <li>5. Run Application.main. Login: ivan.ivanov; password: qwerty.</li>
+  1. Create a database named TestTaskBase in PostgreSQL.
+  2. Restore database using TestTaskBase.backup file.
+  3. In file application.properties enter your login and password.
+  4. подтянуть зависимости в gradle.</li>
+  5. Run Application.main. Login: ivan.ivanov; password: qwerty.
 </ul>
 
 
